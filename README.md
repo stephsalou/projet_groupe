@@ -303,3 +303,98 @@ class Souscription(models.Model):
         verbose_name = 'Souscription'
         verbose_name_plural = 'Souscriptions'
 ```
+
+
+###### PORFILE
+
+```python
+class Profile(models.Model):
+    """Model definition for Profile."""
+
+    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='profil')
+    status = models.BooleanField(default=True)
+    date_add = models.DateTimeField(auto_now_add=True)
+    date_upd = models.DateTimeField(auto_add=True)
+    class Meta:
+        """Meta definition for Profile."""
+        verbose_name = 'Profile'
+        verbose_name_plural = 'Profiles'
+````
+
+### CONFIGURATION
+
+- about
+
+```python
+
+class About(models.Model):
+    titre=models.CharField(max_length=255)
+    description=models.TextField()
+    active=models.BooleanField(default=True)
+    url_video=models.URLField()
+    status = models.BooleanField(default=True) 
+    date_add=models.DateTimeField(auto_now_add=True)
+    date_upd=models.DateTimeField(auto_now=True)
+````
+
+- about Config
+```python
+
+class AboutConf(models.Model):
+    titre=models.CharField(max_length=255)
+    description=models.TextField()
+    image=models.ImageField(upload_to='AboutConf')
+    status = models.BooleanField(default=True)
+    date_add=models.DateTimeField(auto_now_add=True)
+    date_upd=models.DateTimeField(auto_now=True)
+```
+- service 
+```python
+class Service(models.Model):
+    titre=models.CharField(max_length=255)
+    image=models.ImageField(upload_to='Service')
+    description=models.TextField()
+    status = models.BooleanField(default=True)
+    date_add=models.DateTimeField(auto_now_add=True)
+    date_upd=models.DateTimeField(auto_now=True)
+ ````
+
+- mainconfig
+
+```python
+class MainConfig(models.Model):
+    logo=models.ImageField(upload_to='MainConfig')
+    ville=models.CharField(max_length=255)
+    pays=models.CharField(max_length=255)
+    adresse=models.CharField(max_length=255)
+    email=models.EmailField()
+    tel=models.CharField(max_length=255)
+    status = models.BooleanField(default=True)
+    date_add=models.DateTimeField(auto_now_add=True)
+    date_upd=models.DateTimeField(auto_now=True)
+
+```
+
+- location
+
+```python
+class Location(models.Model):
+    """Model definition for Location."""
+
+    longitude = models.CharField(max_length=250)
+    latitude = models.CharField(max_length=250)
+    status = models.BooleanField(default=True)
+    date_add = models.DateTimeField(auto_now_add=True)
+    date_upd = models.DateTimeField(auto_add=True)
+
+    class Meta:
+        """Meta definition for Location."""
+
+        verbose_name = 'Location'
+        verbose_name_plural = 'Locations'
+
+    def __str__(self):
+        """Unicode representation of Location."""
+        return '{} {}'.format(self.latitude,self.longitude ) # TODO
+
+```
