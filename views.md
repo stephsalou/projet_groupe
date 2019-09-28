@@ -41,3 +41,64 @@ def single_blog(request,id):
 
     return render(request, 'pages/blog/single_blog.html',data)
  ```
+ 
+ ### ARCHITECTURE VIEWS
+ 
+ ```python 
+ 
+ from django.shortcuts import render
+from .models import *
+from django.core.paginator import Paginator
+# Create your views here.
+
+
+def home(request):
+    about = About.objects.filter(status=True)[:1]
+    service = Service.objects.filter(status=True)[:1]
+    Project = Project.objects.filter(status=True)[:6]
+    post = Article.objects.filter(status=True)[:3]
+
+    data= {
+        'about':about,
+        'service':service,
+        'project':Project,
+        'post':post
+    }
+    return render(request, 'pages/architectures/index.html',data)
+
+
+def about_architec(request):
+    about = About.objects.filter(status=True)[:1]
+    post = Article.objects.filter(status=True)[:3]
+    data= {
+        'about':about,
+        'post':post
+    }
+    return render(request, 'pages/architectures/abouts.html')
+
+def project_architec(request):
+    projet = Project.objects.filter(status=True)
+    architect = Achitect.objects.filter(status=True)
+    data = {
+        'architect':architect,
+        'projet':projet
+    }
+    return render(request, 'pages/architectures/project.html',data)
+
+def single_architec(request):
+    architect = Achitect.objects.filter(status=True)
+    projet = Project.objects.filter(status=True)
+    data = {
+        'architect':architect,
+        'projet':projet
+    }
+    return render(request, 'pages/architectures/single_project.html')
+
+def service_architec(request):
+    service = Service.objects.filter(status=True)[:6]
+    data={
+        'servcice':service
+    }
+    return render(request, 'pages/architectures/services.html',service)
+ 
+ ```
