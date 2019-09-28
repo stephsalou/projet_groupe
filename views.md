@@ -26,6 +26,18 @@ def blog_home(request):
     }
     return render(request, 'pages/blog/accueil_blog.html',data)
 
-def single_blog(request):
-    return render(request, 'pages/blog/single_blog.html')
+
+def single_blog(request,id):
+    art_recent = Article.objects.filter(date_lt = now())
+    tags = Tag.objects.filter(status=True)
+    category = Category.objects.filter(status=True)
+    article = Article.objects.get(pk=id)
+    data={
+        'art_recent':art_recent,
+        'tags':tags,
+        'category':category,
+        'article':article
+    }
+
+    return render(request, 'pages/blog/single_blog.html',data)
  ```
