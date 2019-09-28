@@ -135,3 +135,53 @@ def deconnexion(request):
     return redirect('mylogin') 
  
  ```
+ 
+ ### CONTACT 
+ - contact form 
+ ```python
+from django.forms import ModelForm
+from .models import *
+
+
+class ContactForm(ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['nom', 'prenoms', 'sujet','email','status','date_add','date_upd']
+
+
+ 
+class NewsletterForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['email',]
+ 
+ ```
+ 
+ 
+ ```python
+ from django.shortcuts import render
+from .models import *
+from .fomrs import *
+
+# Create your views here.
+
+def message(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+            if form.is_valid():
+                model = form.save()
+                return redirect('/')
+    return render(request, "my_template.html")
+
+
+
+def newsletter(request):
+    if request.method == 'POST':
+        form = NewsletterForm(request.POST)
+            if form.is_valid():
+                model = form.save()
+                return redirect('/')
+    return render(request, "my_template.html")
+
+    
+ ```
