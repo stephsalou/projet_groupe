@@ -70,7 +70,7 @@ class Article(models.Model):
     image = models.ImageField(upload_to="images_article")
     status = models.BooleanField(default=True)
     date_add = models.DateTimeField(auto_now_add=True)
-    date_uod = models.DateTimeField(auto_add=True)
+    date_upd = models.DateTimeField(auto_add=True)
         
       
     def __str__(self):
@@ -87,6 +87,7 @@ class Souscription(models.Model):
     email = models.EmailField()
     status = models.BooleanField(default=True)
     date_add = models.DateTimeField(auto_now_add=True)
+    date_upd = models.DateTimeField(auto_add=True)
     def __str__(self):
      return self.email
 
@@ -104,7 +105,7 @@ class Like(models.Model):
     article_id = models.ForeignKey(User,on_delete= models.CASCADE, related_name="Auteur_Like")
     status = models.BooleanField(default=True)
     date_add = models.DateTimeField(auto_now_add=True)
-
+    date_upd = models.DateTimeField(auto_add=True)
     def __str__(self):
          return self.email
 
